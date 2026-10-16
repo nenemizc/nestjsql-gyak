@@ -1,5 +1,6 @@
-import { Controller, Get, Render, Query } from '@nestjs/common';
+import { Controller, Get, Render, Query, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service.js';
+import { CreateJatekDto } from './create-jatek.dto.js';
 
 @Controller()
 export class AppController {
@@ -35,5 +36,18 @@ export class AppController {
     return {
       macskak: await this.appService.macskaKeres(nev)
     }
+  }
+
+  @Get('ujJatek')
+  @Render('ujJatek')
+  ujJatekForm() {
+    return {};
+  }
+
+  @Post('ujJatek')
+  @Render('ujJatek')
+  async createJatekPost(@Body() createJatekDto: CreateJatekDto) {
+      const createdJatek = await this.appService.createJatek(createJatekDto.nev);
+      return { createdJatek };
   }
 }

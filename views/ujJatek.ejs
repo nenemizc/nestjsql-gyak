@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Új játék</h1>
+    <form action="/ujJatek" method="POST">
+        <div>
+            <label for="nev">Játék neve:</label>
+            <input type="text" id="nev" name="nev">
+        </div>
+        <button type="submit">Mentés</button>
+    </form>
+
+    <% if (typeof createdJatek !== 'undefined' && createdJatek) { %>
+        <div style="color: green; margin-top: 15px; border: 1px solid green; padding: 10px;">
+            <h3>Sikeresen létrehozva!</h3>
+            <p>ID: <%= createdJatek.id %></p>
+            <p>Név: <%= createdJatek.nev %></p>
+        </div>
+    <% } %>
+</body>
+</html>

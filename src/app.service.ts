@@ -41,4 +41,16 @@ export class AppService {
     const rows = results as Macska[];
     return rows;
   }
+
+  async createJatek(nev: string) {
+    if (!nev || nev.trim() === '') {
+      throw new Error('A játék neve nem lehet üres!');
+    }
+    const [result] = await mysqlConnection.execute(
+      'INSERT INTO jatekok (nev) VALUES (?)',
+      [nev]
+    );
+    const insertId = (result as any).insertId;
+    return { id: insertId, nev };
+  }
 }
