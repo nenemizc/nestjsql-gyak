@@ -33,9 +33,10 @@ export class AppService {
   }
 
   async macskaKeres(nev: string) {
+    const nev2 = `%${nev}%`;
     const [results] = await mysqlConnection.execute(
-      'SELECT id, suly, szem_szin, gazdi_id, jatek_id FROM macskak WHERE szem_szin like "%?%"',
-      [ nev ]
+      'SELECT id, suly, szem_szin, gazdi_id, jatek_id FROM macskak WHERE szem_szin like ?',
+      [ nev2 ]
     );
     const rows = results as Macska[];
     return rows;
